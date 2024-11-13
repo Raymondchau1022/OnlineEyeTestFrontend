@@ -1,21 +1,58 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { Link } from 'expo-router';
-
+import React, { useState, useEffect } from 'react';
+import { Button, Linking, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Link, useRouter } from 'expo-router';
+import { useCameraPermissions } from 'expo-camera';
 
 const HomeScreen = () => {
+  const [permission, requestPermission] = useCameraPermissions();
+  const [started, setStarted] = useState<boolean>(false);
+
+  const router = useRouter();
+
+  const handleStartPress = () => {
+    setStarted(true);
+  };
+
+  const handlePermissionPress = () => {
+    requestPermission();
+    if (permission && !permission.canAskAgain) {
+      Linking.openSettings();
+    }
+  }
+
+  useEffect(() => {
+    if (started && permission && permission.granted) {
+      router.push('/VisualAcuityTest');
+    }
+  }, [permission, started, router]);
+
+  if (!permission) {
+    // Camera permissions are still loading.
+    return <View />;
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to the Online Eye Test</Text>
-      <Text style={styles.instructions}>
-        This app will help you test your visual acuity using the logMAR scale with a tumbling E-test. 
-        Please ensure you are in a well-lit environment and follow the instructions carefully.
-      </Text>
-      <Link href="/VisualAcuityTest" asChild>
-        <TouchableOpacity style={styles.button}>
+      {!started ? 
+      <View style={styles.container}>
+        <Text style={styles.title}>Welcome to the Online Eye Test</Text>
+        <Text style={styles.instructions}>
+          This app will help you test your visual acuity using the logMAR scale with a tumbling E-test.
+          Please ensure you are in a well-lit environment and follow the instructions carefully.
+        </Text>
+        <TouchableOpacity style={styles.button} onPress={handleStartPress}>
           <Text style={styles.buttonText}>Start</Text>
         </TouchableOpacity>
-      </Link>
+      </View>
+      : 
+      <View style={styles.container}>
+        <Text style={styles.message}>
+          We need your permission to show the camera
+        </Text>
+          <Button onPress={handlePermissionPress} title="Grant Permission" />
+      </View>
+      }
+      
     </View>
   );
 };
@@ -25,11 +62,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    padding: 10,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    textAlign: 'center',
     marginBottom: 20,
   },
   instructions: {
@@ -46,6 +84,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     textAlign: 'center',
+  },
+  message: {
+    textAlign: 'center',
+    paddingBottom: 10,
   },
 });
 
