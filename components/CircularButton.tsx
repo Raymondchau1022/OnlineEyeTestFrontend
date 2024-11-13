@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         justifyContent: 'center',
         alignItems: 'center',
+        margin: 15,
     },
     crossDiagonalLeft: {
         position: 'absolute',

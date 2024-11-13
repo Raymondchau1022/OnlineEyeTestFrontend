@@ -45,9 +45,9 @@ const VisualAcuityTest = () => {
 
   const questionLogic = () => {
     return (
-      <View>
+      <View style={styles.container}>
         <Text style={styles.questionText}> 
-          {selectedEye === 'left' ? 'Left' : 'right'} eye: Question {currentQuestionIndex} of 7
+          {selectedEye === 'left' ? 'Left' : 'Right'} eye: Question {currentQuestionIndex} of 7
         </Text>
         <TumblingE direction={roundDirection} size={getSizeForQuestion(currentQuestionIndex)} />      
         <CircularButton onDirectionPress={handleDirectionPress} />
@@ -60,21 +60,29 @@ const VisualAcuityTest = () => {
 
   const resultDisplay = () => {
     return (
-      <View>
-        <Text style={styles.resultText}>Test Complete</Text>
-        <Text style={styles.resultText}>Results:</Text>
-        <ScrollView style={styles.resultsContainer}>
-          {answers.map((answer, index) => (
-            <View key={index} style={styles.resultItem}>
-              <Text>Question {index + 1}:</Text>
-              <Text>User Answer: {answer.userAnswer}</Text>
-              <Text>Correct Answer: {answer.roundAnswer}</Text>
-              <Text style={answer.userAnswer === answer.roundAnswer ? styles.correct : styles.incorrect}>
-                {answer.userAnswer === answer.roundAnswer ? 'Correct' : 'Incorrect'}
-              </Text>
-            </View>
-          ))}
-        </ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.resultText}>Test Complete Results:</Text>
+        <View style={styles.shadowContainer}>
+          <ScrollView style={styles.resultsContainer}>
+            {answers.map((answer, index) => (
+              <View key={index} style={styles.resultItem}>
+                <Text style={styles.resultTextCommon}>
+                  {(index < 7) ? 
+                    `Left eye question ${index + 1}:` : 
+                    `Right eye question ${index - 6}:`}
+                </Text>
+                <Text style={styles.resultTextCommon}>User Answer: {answer.userAnswer}</Text>
+                <Text style={styles.resultTextCommon}>Correct Answer: {answer.roundAnswer}</Text>
+                <Text style={[
+                  styles.resultTextCommon, 
+                  answer.userAnswer === answer.roundAnswer ? styles.correct : styles.incorrect
+                ]}>
+                  {answer.userAnswer === answer.roundAnswer ? 'Correct' : 'Incorrect'}
+                </Text>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
       </View>
     );
   };
@@ -92,36 +100,45 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#f0f0f0', // Light gray background
-    margin: 40,
   },
   questionText: {
     fontSize: 24,
     color: '#333', // Dark gray text color
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 10,
   },
   resultText: {
     fontSize: 28,
-    marginBottom: 20,
+    marginBottom: 40,
     color: '#007AFF', // iOS blue color
   },
-  resultsContainer: {
-    maxHeight: 300,
+  shadowContainer: {
+    maxHeight: '70%',
     width: '100%',
-    padding: 10,
-    backgroundColor: '#fff', // White background for results
+    padding: 50,
+    backgroundColor: '#fff', // White background for shadow container
     borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowColor: 'black',
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.7,
+    shadowRadius: 5,
     elevation: 5,
+    
+  },
+  resultsContainer: {
+    flexGrow: 1,
+    backgroundColor: 'transparent',
   },
   resultItem: {
     marginBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
     paddingBottom: 5,
+  },
+  resultTextCommon: {
+    fontSize: 18, 
+    color: '#333', 
   },
   correct: {
     color: '#4CAF50', // Green for correct answers

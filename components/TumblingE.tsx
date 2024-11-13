@@ -36,11 +36,11 @@ const TumblingE: React.FC<TumblingEProps> = ({ direction, size }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // width: 200,
-    // height:200,
+    width: 200,
+    height: 200,
     justifyContent: 'center',
     alignItems: 'center',
+    margin: 15,
   },
   image: {
     resizeMode: 'contain', 
