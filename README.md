@@ -1,50 +1,48 @@
-# Welcome to your Expo app 👋
+# Welcome to your Expo App 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is an [Expo](https://expo.dev) project built using [Expo Application Services (EAS)](https://expo.dev/eas).
 
-## Get started
+## Get Started
 
-1. Install dependencies
+1. **Install dependencies**  
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. **Prebuild the project**  
 
    ```bash
-    npx expo start
+   npx expo prebuild
    ```
 
-In the output, you'll find options to open the app in a
+3. **Open the project in Xcode**  
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   ```bash
+   open ios/OnlineEyeTestFrontend.xcworkspace
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+4. **Set up build configuration**  
+   - Set the build configuration to `Release`.
+   - In the Xcode project navigator, select your project, go to the **"Signing & Capabilities"** tab, and set your Team Name and Bundle Identifier.  
+   - If you don’t have an Apple Developer account, register here: [Apple Developer Program](https://developer.apple.com/programs/).
 
-## Get a fresh project
+5. **Run the app on a physical iOS device**  
+   - Choose your local device in Xcode, then click **Run**.
 
-When you're ready, run:
+## Troubleshooting
 
-```bash
-npm run reset-project
-```
+1. **Error: "No script URL provided..."**
+   - Make sure the Metro Bundler is running:  
+     ```bash
+     npx expo start
+     ```
+   - Ensure your phone and computer are on the same network, and VPNs are disabled.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. **Rebuild if necessary**  
+   If issues persist, remove the `ios` directory and prebuild again:  
+   ```bash
+   rm -rf ios
+   npx expo prebuild
+   ```
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
