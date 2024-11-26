@@ -23,6 +23,7 @@ const HomeScreen = () => {
   useEffect(() => {
     if (started && permission && permission.granted) {
       router.push('/VisualAcuityTest');
+      //router.push('/testing');
     }
   }, [permission, started, router]);
 

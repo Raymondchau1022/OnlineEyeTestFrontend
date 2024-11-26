@@ -30,6 +30,7 @@ export default function RootLayout() {
       <Stack initialRouteName="index">
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="VisualAcuityTest" options={{ headerShown: false }}/>
+        <Stack.Screen name="testing" options={{ headerShown: false }}/>
         <Stack.Screen name="+not-found" />
       </Stack>
     </ThemeProvider>

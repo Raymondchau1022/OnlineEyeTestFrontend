@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import TumblingE from '../components/TumblingE';
 import CircularButton from '../components/CircularButton';
+import DistanceCamera from '../components/DistanceCamera';
 
 type Direction = 'Top' | 'Left' | 'Right' | 'Bottom';
 
@@ -12,6 +13,7 @@ const VisualAcuityTest = () => {
   const [roundDirection, setRoundDirection] = useState<Direction>('Top'); //default Direction
   const [answers, setAnswers] = useState<Array<{ userAnswer: Direction; roundAnswer: Direction }>>([]);
   const [testCompleted, setTestCompleted] = useState(false);
+  const [distance, setDistance] = useState<number | null>(null);
 
   const handleDirectionPress = (direction: Direction) => {
     setSelectedDirection(direction);
@@ -54,6 +56,8 @@ const VisualAcuityTest = () => {
         <Text style={{ fontSize: 18, marginTop: 20, justifyContent: 'center', alignItems: 'center', }}>
           {selectedDirection ? `Pressed: ${selectedDirection}` : 'Not pressed'}
         </Text>
+        <DistanceCamera onDistanceChange={(newDistance) => setDistance(newDistance)} />
+        <Text style={styles.distanceText}>Distance from device: {distance ? `${distance.toFixed(2)} cm` : 'No face detected'}</Text>
       </View>
     );  
   };
@@ -145,6 +149,12 @@ const styles = StyleSheet.create({
   },
   incorrect: {
     color: '#F44336', // Red for incorrect answers
+  },
+  distanceText: {
+    fontSize: 18,
+    marginTop: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

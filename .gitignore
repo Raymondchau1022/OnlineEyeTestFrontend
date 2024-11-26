@@ -1,14 +1,25 @@
+# Node modules
 node_modules/
+
+# Expo
 .expo/
 dist/
+web-build/
+
+# Debug files
 npm-debug.*
+*.orig.*
+
+# Expo build artifacts
 *.jks
 *.p8
 *.p12
 *.key
 *.mobileprovision
-*.orig.*
-web-build/
+
+# Ignore iOS and Android folders for managed Expo workflow
+ios/
+android/
 
 # macOS
 .DS_Store
