@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import TumblingE from '../components/TumblingE';
 import CircularButton from '../components/CircularButton';
 import DistanceCamera from '../components/DistanceCamera';
+import SpeechToText from './VoiceInput'; // Import Speechtotext from
 
 type Direction = 'Top' | 'Left' | 'Right' | 'Bottom';
 
@@ -14,6 +15,21 @@ const VisualAcuityTest = () => {
   const [answers, setAnswers] = useState<Array<{ userAnswer: Direction; roundAnswer: Direction }>>([]);
   const [testCompleted, setTestCompleted] = useState(false);
   const [distance, setDistance] = useState<number | null>(null);
+  const {results, startSpeechToText,stopSpeechToText} = SpeechToText();
+  useEffect(() => {
+    startSpeechToText();
+    return () => {
+      // Stop the speech recognition when the component unmounts
+      stopSpeechToText();
+    };
+  }, []);
+  useEffect(() => {
+    if (results[0]) {
+      handleDirectionPress(results[0]);
+    }
+  }, [results]);
+
+
 
   const handleDirectionPress = (direction: Direction) => {
     setSelectedDirection(direction);
@@ -58,6 +74,9 @@ const VisualAcuityTest = () => {
         </Text>
         <DistanceCamera onDistanceChange={(newDistance) => setDistance(newDistance)} />
         <Text style={styles.distanceText}>Distance from device: {distance ? `${distance.toFixed(2)} cm` : 'No face detected'}</Text>
+        <Text style={{ fontSize: 18, marginTop: 10 }}>
+          Results Value: {results}
+        </Text>
       </View>
     );  
   };
@@ -159,3 +178,5 @@ const styles = StyleSheet.create({
 });
 
 export default VisualAcuityTest;
+
+
