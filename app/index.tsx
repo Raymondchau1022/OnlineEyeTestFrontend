@@ -11,8 +11,9 @@ const HomeScreen = () => {
 
   const handleStartPress = () => {
     // setStarted(true);
-    router.push('/StartScreen'); // Navigate to StartScreen
-  };
+    // router.push('/StartScreen'); // Navigate to StartScreen
+    router.push('/TermsOfAgreement'); // Navigate to Terms of Agreement
+    };
 
   const handlePermissionPress = () => {
     requestPermission();
