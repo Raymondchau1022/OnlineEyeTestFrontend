@@ -10,7 +10,8 @@ const HomeScreen = () => {
   const router = useRouter();
 
   const handleStartPress = () => {
-    setStarted(true);
+    // setStarted(true);
+    router.push('/StartScreen'); // Navigate to StartScreen
   };
 
   const handlePermissionPress = () => {
