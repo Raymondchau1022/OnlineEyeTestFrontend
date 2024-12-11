@@ -17,22 +17,22 @@ const CircularButton: React.FC<CircularButtonProps> = ({ onDirectionPress }) => 
 
             {/* Top Section */}
             <TouchableOpacity style={[styles.section, styles.topSection]} onPress={() => onDirectionPress('Top')}>
-                <Text style={styles.text}>Top</Text>
+                <Text style={styles.arrow}>↑</Text>
             </TouchableOpacity>
 
             {/* Bottom Section */}
             <TouchableOpacity style={[styles.section, styles.bottomSection]} onPress={() => onDirectionPress('Bottom')}>
-                <Text style={styles.text}>Bottom</Text>
+                <Text style={styles.arrow}>↓</Text>
             </TouchableOpacity>
 
             {/* Left Section */}
             <TouchableOpacity style={[styles.section, styles.leftSection]} onPress={() => onDirectionPress('Left')}>
-                <Text style={styles.text}>Left</Text>
+                <Text style={styles.arrow}>←</Text>
             </TouchableOpacity>
 
             {/* Right Section */}
             <TouchableOpacity style={[styles.section, styles.rightSection]} onPress={() => onDirectionPress('Right')}>
-                <Text style={styles.text}>Right</Text>
+                <Text style={styles.arrow}>→</Text>
             </TouchableOpacity>
 
         </View>
@@ -95,7 +95,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         color: '#333',
-    },
+    },arrow: {
+    fontSize: 24, // adjust the font size as needed
+    textAlign: 'center',
+  }
 });
 
 export default CircularButton;

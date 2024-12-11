@@ -5,7 +5,7 @@ import Voice from '@react-native-voice/voice'; // Import the voice recognition l
 
 export default function SpeechToText() {
   // State to track if speech recognition has started
-  let [started, setStarted] = useState(false);
+  let [voiceInputstarted, setStarted] = useState(false);
   // Store the results of the speech recognition
   let [results, setResults] = useState([]);
 
@@ -21,19 +21,16 @@ export default function SpeechToText() {
   }, []); 
 
   const startSpeechToText = async () => {
-    if (!started) { // Check if speech recognition has not started
       await Voice.start("zh-HK"); // Start recognizing speech in Cantonese
       setStarted(true); // Update state to indicate recognition has started
       setResults([]);
-    }
   };
 
   // Function to stop speech recognition
   const stopSpeechToText = async () => {
-    if (started) { // Check if speech recognition has started
-      await Voice.stop(); // Stop the speech recognition
+
+      await Voice.destroy(); // Stop the speech recognition
       setStarted(false); // Update state to indicate recognition has stopped
-    }
   };
 
   // Function to handle successful speech recognition results
@@ -53,7 +50,9 @@ export default function SpeechToText() {
     if (action) {
       setResults([keywordActions[action]]);
       Voice.destroy();
+      setStarted(false);
       setTimeout(() => Voice.start("zh-HK"), 1500);
+      setStarted(true);
       console.log(`Action: ${keywordActions[action]}`);
     }
   };
@@ -67,6 +66,9 @@ export default function SpeechToText() {
   return {
     results,
     startSpeechToText,
+    stopSpeechToText,
+    setStarted,
+    voiceInputstarted,
   };
 }
 
