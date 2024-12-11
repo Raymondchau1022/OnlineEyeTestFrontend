@@ -1,6 +1,6 @@
-import { StatusBar } from 'expo-status-bar'; 
-import { StyleSheet, Text, Button, View } from 'react-native'; 
-import { useEffect, useState } from 'react'; 
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, Button, View } from 'react-native';
+import { useEffect, useState } from 'react';
 import Voice from '@react-native-voice/voice'; // Import the voice recognition library
 
 export default function SpeechToText() {
@@ -11,14 +11,14 @@ export default function SpeechToText() {
 
   useEffect(() => {
     // Set up event listeners for speech recognition
-    Voice.onSpeechError = onSpeechError; 
-    Voice.onSpeechResults = onSpeechResults; 
-   
+    Voice.onSpeechError = onSpeechError;
+    Voice.onSpeechResults = onSpeechResults;
+
     return () => {
       // Cleanup listeners
       Voice.destroy().then(Voice.removeAllListeners);
     }
-  }, []); 
+  }, []);
 
   const startSpeechToText = async () => {
       await Voice.start("zh-HK"); // Start recognizing speech in Cantonese
@@ -59,7 +59,7 @@ export default function SpeechToText() {
 
   // Function to handle errors during speech recognition
   const onSpeechError = (error) => {
-    console.log(error); 
+    console.log(error);
   };
 
   // Render the UI

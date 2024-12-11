@@ -1,9 +1,15 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { useRouter } from 'expo-router';
+
 
 const StartScreen = () => {
+
+    const router = useRouter();
+
     const handleStartPress = () => {
         console.log('Start button pressed');
+        router.push('/VisualAcuityTest');
     };
 
     const handleGridButtonPress = (index: number) => {
