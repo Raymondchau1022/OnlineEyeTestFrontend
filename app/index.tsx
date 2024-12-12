@@ -10,8 +10,10 @@ const HomeScreen = () => {
   const router = useRouter();
 
   const handleStartPress = () => {
-    setStarted(true);
-  };
+    // setStarted(true);
+    // router.push('/StartScreen'); // Navigate to StartScreen
+    router.push('/TermsOfAgreement'); // Navigate to Terms of Agreement
+    };
 
   const handlePermissionPress = () => {
     requestPermission();

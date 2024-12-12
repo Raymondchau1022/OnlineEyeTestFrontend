@@ -36,8 +36,8 @@ const DistanceCamera = ({ onDistanceChange }: DistanceCameraProps) => {
       const faceWidth = face.bounds.width;
 
       // Parameters
-      const knownFaceWidthAt1Meter = 300; // Assume face width is 300 pixels at 1 meter
-      const focalLength = 110; // Assume camera focal length is 110 pixels
+      const knownFaceWidthAt1Meter = 280; // Assume face width is 300 pixels at 1 meter
+      const focalLength = 95; // Assume camera focal length is 110 pixels
 
       // Calculate distance
       const calculatedDistanceCm = (knownFaceWidthAt1Meter * focalLength) / faceWidth;

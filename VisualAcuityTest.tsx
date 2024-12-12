@@ -109,7 +109,7 @@ const VisualAcuityTest = () => {
           {selectedDirection ? `Pressed: ${selectedDirection}` : 'Not pressed'}
         </Text>
         <DistanceCamera onDistanceChange={(newDistance) => setDistance(newDistance)} />
-        <Text style={[styles.distanceText, {position: 'absolute', bottom: 100}]}>Distance from device: {distance ? `${distance.toFixed(1)} cm` : 'No face detected'}</Text>
+        <Text style={[styles.distanceText, {position: 'absolute', bottom: 100}]}>Distance from device: {distance ? `${distance.toFixed(0)} cm` : 'No face detected'}</Text>
         <Text style={{ fontSize: 18, marginTop: 10 }}>
           Voice detected : {results}
         </Text>
